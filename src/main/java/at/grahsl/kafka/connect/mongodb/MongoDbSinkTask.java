@@ -146,7 +146,7 @@ public class MongoDbSinkTask extends SinkTask {
                         docsToWrite, BULK_WRITE_OPTIONS);
                 LOGGER.debug("mongodb bulk write result: " + result.toString());
             }
-        } catch (DuplicateKeyException mexc) {
+        } catch (MongoBulkWriteException mexc) {
             LOGGER.warn("duplicated kex exception", mexc);
             LOGGER.warn(mexc.getMessage());
         } catch (MongoException mexc) {
