@@ -21,10 +21,7 @@ import at.grahsl.kafka.connect.mongodb.converter.SinkConverter;
 import at.grahsl.kafka.connect.mongodb.converter.SinkDocument;
 import at.grahsl.kafka.connect.mongodb.processor.PostProcessor;
 import at.grahsl.kafka.connect.mongodb.writemodel.strategy.WriteModelStrategy;
-import com.mongodb.BulkWriteException;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.MongoException;
+import com.mongodb.*;
 import com.mongodb.bulk.BulkWriteResult;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -149,6 +146,9 @@ public class MongoDbSinkTask extends SinkTask {
                         docsToWrite, BULK_WRITE_OPTIONS);
                 LOGGER.debug("mongodb bulk write result: " + result.toString());
             }
+        } catch (DuplicateKeyException mexc) {
+            LOGGER.warn("duplicated kex exception", mexc);
+            LOGGER.warn(mexc.getMessage());
         } catch (MongoException mexc) {
             if (mexc instanceof BulkWriteException) {
                 BulkWriteException bwe = (BulkWriteException) mexc;
