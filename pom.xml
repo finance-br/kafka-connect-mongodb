@@ -4,7 +4,7 @@
 
     <groupId>at.grahsl.kafka.connect</groupId>
     <artifactId>kafka-connect-mongodb</artifactId>
-    <version>1.4.0-0.1.0</version>
+    <version>1.4.0-0.1.1</version>
     <packaging>jar</packaging>
 
     <name>kafka-connect-mongodb</name>
